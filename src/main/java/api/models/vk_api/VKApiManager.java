@@ -1,9 +1,9 @@
 package api.models.vk_api;
 
+import api.models.vk_api.impl.VKInfoApiManagerImpl;
 import api.utils.BaseUri;
-import api.utils.UtilsHelper;
 import api.utils.impl.BaseUriImpl;
-import api.utils.impl.UtilsHelperImpl;
+import api.utils.UtilsHelper;
 import com.google.gson.Gson;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -21,7 +21,7 @@ import static constants.Constants.EndPoint.*;
 @Setter
 public class VKApiManager {
     protected BaseUri baseUri = new BaseUriImpl();
-    protected UtilsHelper utilsHelper = new UtilsHelperImpl();
+    protected UtilsHelper utilsHelper;
     protected Root root;
     protected Response response;
     private List<Object> idUniversals = new ArrayList<>();
@@ -30,56 +30,35 @@ public class VKApiManager {
     private List<Object> ids;
     private List<Object> ownerIds;
 
+    private  VKInfoApiManager vkInfoApiManager = new VKInfoApiManagerImpl();
+
     protected Map<String, Object> paramsForSave = new HashMap<>();
 
 
     public VKApiManager getProfileInfo(String VKApi, String VKVersion) {
-        response = RestAssured.given().params(getParams(VKApi, VKVersion)).log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_GET_PROFILE_INFO)
-                .then().log().body().extract().response();
-        String jsonText = response.body().asString();
         Gson gson = new Gson();
-        root = gson.fromJson(jsonText, Root.class);
+        root = gson.fromJson(vkInfoApiManager.getProfileInfo(getParams(VKApi,VKVersion)), Root.class);
         idUniversals.add(root.getResponse().getId());
         return this;
     }
 
     public VKApiManager setProfileInfo(String VKApi, String VKVersion) {
-        response = RestAssured.given().params(getParams(VKApi, VKVersion))
-                .param("status", utilsHelper.findEmptyFields(root)).log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_SET_PROFILE_INFO)
-                .then().log().body().extract().response();
+        vkInfoApiManager.setProfileInfo(getParams(VKApi, VKVersion), UtilsHelper.findEmptyFields(root));
         return this;
     }
 
     public VKApiManager getUrlForUploadPhoto(String VKApi, String VKVersion) {
-        response = RestAssured.given().params(getParams(VKApi, VKVersion)).log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_GET_SAVE_URL_PHOTO)
-                .then().log().body().extract().response();
+        vkInfoApiManager.getUrlForUploadPhoto(getParams(VKApi, VKVersion));
         return this;
     }
 
     public VKApiManager uploadPhotoToServer () {
-        String filePath = "src/test/resources/file/photo.jpg";
-        String path = getUtilsHelper().getUrlUploadFile(getResponse());
-        RequestSpecification request = RestAssured.given();
-        response = request.contentType("multipart/form-data")
-                .multiPart(new File(filePath)).log().all()
-                .post(path)
-                .then()
-                .log().all().extract().response();
-        paramsForSave = utilsHelper.getParamsForSavePhoto(getResponse());
+        paramsForSave = vkInfoApiManager.uploadPhotoToServer();
         return this;
     }
 
     public VKApiManager savePhoto(String VKApi, String VKVersion) {
-        response = RestAssured.given().params(getParams(VKApi, VKVersion))
-                .param("server", paramsForSave.get("server"))
-                .param("photo", paramsForSave.get("photo"))
-                .param("hash", paramsForSave.get("hash"))
-                .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_UPLOAD_PHOTO_TO_SERVER)
-                .then().log().body().extract().response();
+        vkInfoApiManager.savePhoto(getParams(VKApi, VKVersion), paramsForSave.get("server"), paramsForSave.get("photo"), paramsForSave.get("hash"));
         return this;
     }
 

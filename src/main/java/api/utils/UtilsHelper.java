@@ -1,50 +1,52 @@
 package api.utils;
 
 import io.restassured.response.Response;
+import lombok.experimental.UtilityClass;
 import pojo.Root;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
-public interface UtilsHelper {
+@UtilityClass
+public class UtilsHelper {
 
-    /**
-     * Метод находит пустые поля в POJO и для первого пустого STRING поля устанавливает значение "Тест"
-     * @return - или значение "Тест" если нашлось пустое поле, или "" Если пустого поля нет
-     */
-    String findEmptyFields(Root root);
+    public String findEmptyFields(Root root) {
+        try {
+            Stream<String> stringStream = Stream.of(root.getResponse().getBdate(), root.getResponse().getFirst_name(), root.getResponse().getLast_name(), root.getResponse().getStatus());
+            String emptyFieldValue = stringStream.filter(String::isEmpty).findFirst().orElse("Исключительный случай");
+            return emptyFieldValue + "Test";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 
-    /**
-     * Метод парсит в строку response JSON, извлекая из него Path файла
-     * @return - Строку содержащую Path для загрузки файла
-     */
-    String getUrlUploadFile(Response response);
+    public String getUrlUploadFile(Response response){
+        return response.jsonPath().getString("response.upload_url");
+    }
 
-    /**
-     * Метод парсит в мапу response JSON полученный после загрузки фотографии на сервер
-     * , извлекая из него Path файла
-     * @return - Map<String, String> с ключами server, photo, hash
-     */
-    Map<String, Object> getParamsForSavePhoto(Response response);
+    public Map<String, Object> getParamsForSavePhoto(Response response) {
+        Map<String, Object> paramsForSavePhoto = response.jsonPath().getMap("$");
+        return paramsForSavePhoto;
+    }
 
-    /**
-     * Метод парсит в строку response JSON, извлекая из него информацию о загруженном документе
-     * @return - Строку содержащую информацию о "file" для сохранения документа
-     */
-    String getUploadDocksInformation(Response response);
+    public String getUploadDocksInformation(Response response) {
+        return response.jsonPath().getString("file");
+    }
 
-    /**
-     * @return - List<List<Object>> - лист с листами нужной информации рекомендованных новостей для пользователя
-     */
-    List<List<Object>> getInformationFromRecommendedNews(Response response);
+    public List<List<Object>> getInformationFromRecommendedNews(Response response) {
+        List<List<Object>> list = new ArrayList<>();
+        list.add(response.jsonPath().getList("response.items.post_id"));
+        list.add(response.jsonPath().getList("response.items.attachments.photo.owner_id"));
+        return list;
+    }
 
-    /**
-     * @return - целечисленное значение ID созданного сообщества
-     */
-    Integer getIds(Response response, String path);
+    public Integer getIds(Response response, String path) {
+        return response.jsonPath().getInt(path);
+    }
 
-    /**
-     * @return - целечисленное значение из строки str
-     */
-    Integer getIntegerForString(String str);
+    public Integer getIntegerForString(String str) {
+        return Integer.parseInt(str.replaceAll("[^0-9]", ""));
+    }
 }

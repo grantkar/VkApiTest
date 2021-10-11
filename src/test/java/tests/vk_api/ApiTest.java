@@ -20,21 +20,20 @@ public class ApiTest extends BaseTest {
         apiManager.getVkApiManager().setProfileInfo(VkApi, VkVersion);
     }
 
-//    @Test(priority = 3, description = "get url for upload photo to server")
-//    public void getSaveOwnerPhoto() {
-//        apiManager.getVkApiManager().getUrlForUploadPhoto(VkApi, VkVersion);
-//        System.out.println(apiManager.getVkApiManager().getUtilsHelper().getUrlUploadFile(apiManager.getVkApiManager().getResponse()));
-//    }
-//    @Test(priority = 4, description = "upload photo to server")
-//    public void uploadPhotoToServer() {
-//        apiManager.getVkApiManager().uploadPhotoToServer();
-//        System.out.println(apiManager.getVkApiManager().getUtilsHelper().getParamsForSavePhoto(apiManager.getVkApiManager().getResponse()));
-//    }
-//
-//    @Test(priority = 5, description = "save upload photo")
-//    public void savePhoto() {
-//        apiManager.getVkApiManager().savePhoto(VkApi, VkVersion);
-//    }
+    @Test(priority = 3, description = "get url for upload photo to server")
+    public void getSaveOwnerPhoto() {
+        apiManager.getVkApiManager().getUrlForUploadPhoto(VkApi, VkVersion);
+    }
+    @Test(priority = 4, description = "upload photo to server")
+    public void uploadPhotoToServer() {
+        apiManager.getVkApiManager().uploadPhotoToServer();
+    }
+
+    @Test(priority = 5, description = "save upload photo")
+    public void savePhoto() {
+        apiManager.getVkApiManager().savePhoto(VkApi, VkVersion);
+    }
+
 //    @Test(priority = 6, description = "get url for upload docks to server")
 //    public void getUploadServerDocks() {
 //        apiManager.getVkApiManager().getURIUploadServerDocks(VkApi, VkVersion);
