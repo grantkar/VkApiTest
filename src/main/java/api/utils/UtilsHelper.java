@@ -13,7 +13,7 @@ public class UtilsHelper {
 
     public String findEmptyFields(Root root) {
         try {
-            Stream<String> stringStream = Stream.of(root.getResponse().getBdate(), root.getResponse().getFirst_name(), root.getResponse().getLast_name(), root.getResponse().getStatus());
+            Stream<String> stringStream = Stream.of(root.getResponse().getBDate(), root.getResponse().getFirstName(), root.getResponse().getLastName(), root.getResponse().getStatus());
             String emptyFieldValue = stringStream.filter(String::isEmpty).findFirst().orElse("Исключительный случай");
             return emptyFieldValue + "Test";
         } catch (Exception e) {

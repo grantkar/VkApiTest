@@ -1,5 +1,6 @@
 package pojo;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.*;
 
 @Getter
@@ -9,9 +10,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RelationPartner {
-    public String first_name;
+    @SerializedName("first_name")
+    public String firstName;
     public int id;
-    public String last_name;
-    public boolean can_access_closed;
-    public boolean is_closed;
+    @SerializedName("last_name")
+    public String lastName;
+    @SerializedName("can_access_closed")
+    public boolean canAccessClosed;
+    @SerializedName("is_closed")
+    public boolean isClosed;
 }

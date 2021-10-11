@@ -1,4 +1,5 @@
 package pojo;
+import com.google.gson.annotations.SerializedName;
 import lombok.*;
 import java.util.List;
 
@@ -9,13 +10,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Response{
-    public String first_name;
+    @SerializedName("first_name")
+    public String firstName;
     public int id;
-    public String last_name;
-    public String home_town;
+    @SerializedName("last_name")
+    public String lastName;
+    @SerializedName("home_town")
+    public String homeTown;
     public String status;
-    public String bdate;
-    public int bdate_visibility;
+    @SerializedName("bdate")
+    public String bDate;
+    @SerializedName("bdate_visibility")
+    public int bDateVisibility;
     public City city;
     public Country country;
     public String phone;
