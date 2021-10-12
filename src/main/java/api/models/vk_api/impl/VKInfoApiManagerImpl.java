@@ -30,9 +30,9 @@ public class VKInfoApiManagerImpl implements VKInfoApiManager {
     }
 
     @Override
-    public void setProfileInfo(Map<String, String> params, String emptyParam) {
+    public void setProfileInfo(Map<String, String> params, String emptyField, String emptyValue) {
         response = RestAssured.given().params(params)
-                .param("status", emptyParam).log().uri()
+                .param(emptyField, emptyValue).log().uri()
                 .when().get(baseUri.baseUri() + VK_API_ENDPOINT_SET_PROFILE_INFO)
                 .then().log().body().extract().response();
     }

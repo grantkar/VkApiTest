@@ -43,7 +43,7 @@ public class VKApiManager {
     }
 
     public VKApiManager setProfileInfo(String VKApi, String VKVersion) {
-        vkInfoApiManager.setProfileInfo(getParams(VKApi, VKVersion), UtilsHelper.findEmptyFields(root));
+        vkInfoApiManager.setProfileInfo(getParams(VKApi, VKVersion), UtilsHelper.findEmptyFieldsName(root), UtilsHelper.findEmptyFields(root));
         return this;
     }
 
