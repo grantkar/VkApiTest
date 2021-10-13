@@ -1,4 +1,4 @@
-package api.models.vk_api;
+package api.models.vk_api.interfaces;
 
 import java.util.Map;
 

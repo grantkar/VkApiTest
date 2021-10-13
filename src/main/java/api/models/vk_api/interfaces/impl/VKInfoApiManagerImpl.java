@@ -1,6 +1,6 @@
-package api.models.vk_api.impl;
+package api.models.vk_api.interfaces.impl;
 
-import api.models.vk_api.VKInfoApiManager;
+import api.models.vk_api.interfaces.VKInfoApiManager;
 import api.utils.BaseUri;
 import api.utils.UtilsHelper;
 import api.utils.impl.BaseUriImpl;
@@ -8,11 +8,8 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.Getter;
-
-
 import java.io.File;
 import java.util.Map;
-
 import static constants.Constants.EndPoint.*;
 
 @Getter
