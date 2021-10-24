@@ -1,9 +1,6 @@
 package api.models.vk_api.interfaces.impl;
 
 import api.models.vk_api.interfaces.VKPhotoApiManager;
-import api.utils.BaseUri;
-import api.utils.UtilsHelper;
-import api.utils.impl.BaseUriImpl;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -16,7 +13,6 @@ import static constants.Constants.EndPoint.*;
 public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
 
     private Response response;
-    private BaseUri baseUri = new BaseUriImpl();
 
     @Override
     public Response createPrivetAlbum(Map<String, String> params) {
@@ -24,7 +20,7 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
                 .param("title", "My test privet album")
                 .param("privacy_view", "nobody / only_me")
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_CREATE_ALBUM)
+                .when().get(VK_API_ENDPOINT_CREATE_ALBUM)
                 .then().log().body().extract().response();
         return response;
     }
@@ -34,7 +30,7 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
         response = RestAssured.given().params(params)
                 .param("album_id", idAlbum)
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_GET_SAVE_URL_PHOTO_TO_ALBUM)
+                .when().get(VK_API_ENDPOINT_GET_SAVE_URL_PHOTO_TO_ALBUM)
                 .then().log().body().extract().response();
         return response;
     }
@@ -60,7 +56,7 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
                 .param("aid", paramsForSave.get("aid"))
                 .param("hash", paramsForSave.get("hash"))
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_SAVE_PHOTO_TO_ALBUM)
+                .when().get(VK_API_ENDPOINT_SAVE_PHOTO_TO_ALBUM)
                 .then().log().body().extract().response();
         return response;
     }
@@ -72,7 +68,7 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
                 .param("owner_id", idOwner)
                 .param("photo_id", idPhoto)
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_MAKER_PHOTO_COVER_ALBUM)
+                .when().get(VK_API_ENDPOINT_MAKER_PHOTO_COVER_ALBUM)
                 .then().log().body().extract().response();
     }
 
@@ -83,7 +79,7 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
                 .param("photo_id", idPhoto)
                 .param("message", "Test comment by My")
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_CREATE_COMMENT_PHOTO)
+                .when().get(VK_API_ENDPOINT_CREATE_COMMENT_PHOTO)
                 .then().log().body().extract().response();
     }
 
@@ -98,7 +94,7 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
                 .param("x2", "80")
                 .param("y2", "80")
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_PUT_TAG)
+                .when().get(VK_API_ENDPOINT_PUT_TAG)
                 .then().log().body().extract().response();
     }
 
@@ -107,7 +103,7 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
         response = RestAssured.given().params(params)
                 .param("title", "My test album")
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_CREATE_ALBUM)
+                .when().get(VK_API_ENDPOINT_CREATE_ALBUM)
                 .then().log().body().extract().response();
         return response;
     }
@@ -119,7 +115,7 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
                 .param("target_album_id", TargetAlbumId)
                 .param("photo_id", idPhoto)
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_MOVE_PHOTO)
+                .when().get(VK_API_ENDPOINT_MOVE_PHOTO)
                 .then().log().body().extract().response();
     }
 
@@ -128,7 +124,7 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
         response = RestAssured.given().params(params)
                 .param("album_id", idAlbum)
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_DELETE_PHOTO_ALBUM)
+                .when().get(VK_API_ENDPOINT_DELETE_PHOTO_ALBUM)
                 .then().log().body().extract().response();
     }
 

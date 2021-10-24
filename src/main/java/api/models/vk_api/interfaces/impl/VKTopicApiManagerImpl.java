@@ -1,29 +1,23 @@
 package api.models.vk_api.interfaces.impl;
 
 import api.models.vk_api.interfaces.VKTopicApiManager;
-import api.utils.BaseUri;
-import api.utils.impl.BaseUriImpl;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import lombok.Getter;
-import org.apache.commons.lang3.RandomStringUtils;
-
 import java.util.Map;
-
 import static constants.Constants.EndPoint.*;
 
 @Getter
 public class VKTopicApiManagerImpl implements VKTopicApiManager {
 
     private Response response;
-    private BaseUri baseUri = new BaseUriImpl();
 
     @Override
     public Response createGroup(Map<String, String> params) {
         response = RestAssured.given().params(params)
                 .param("title", "My test group")
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_CREATE_GROUPS)
+                .when().get(VK_API_ENDPOINT_CREATE_GROUPS)
                 .then().log().body().extract().response();
         return response;
     }
@@ -35,7 +29,7 @@ public class VKTopicApiManagerImpl implements VKTopicApiManager {
                 .param("title", "Discussion")
                 .param("text", "Test discussion")
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_ADD_TOPIC)
+                .when().get(VK_API_ENDPOINT_ADD_TOPIC)
                 .then().log().body().extract().response();
         return response;
     }
@@ -47,7 +41,7 @@ public class VKTopicApiManagerImpl implements VKTopicApiManager {
                 .param("topic_id", idTopic)
                 .param("message", massage)
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_CREATE_COMMENT)
+                .when().get(VK_API_ENDPOINT_CREATE_COMMENT)
                 .then().log().body().extract().response();
         return response;
     }
@@ -60,7 +54,7 @@ public class VKTopicApiManagerImpl implements VKTopicApiManager {
                 .param("comment_id", idComment)
                 .param("message", "Test Comment")
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_EDIT_COMMENT)
+                .when().get(VK_API_ENDPOINT_EDIT_COMMENT)
                 .then().log().body().extract().response();
     }
 
@@ -71,7 +65,7 @@ public class VKTopicApiManagerImpl implements VKTopicApiManager {
                 .param("topic_id", idTopic)
                 .param("comment_id", idComment)
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_DELETE_COMMENT)
+                .when().get(VK_API_ENDPOINT_DELETE_COMMENT)
                 .then().log().body().extract().response();
     }
 }

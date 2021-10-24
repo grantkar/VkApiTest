@@ -1,9 +1,7 @@
 package api.models.vk_api.interfaces.impl;
 
 import api.models.vk_api.interfaces.VKDocksApiManager;
-import api.utils.BaseUri;
 import api.utils.UtilsHelper;
-import api.utils.impl.BaseUriImpl;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -18,12 +16,11 @@ import static constants.Constants.EndPoint.*;
 public class VKDocksApiManagerImpl implements VKDocksApiManager {
 
     private Response response;
-    private BaseUri baseUri = new BaseUriImpl();
 
     @Override
     public void getURIUploadServerDocks(Map<String, String> params) {
         response = RestAssured.given().params(params).log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_GET_SAVE_URL_DOCKS)
+                .when().get(VK_API_ENDPOINT_GET_SAVE_URL_DOCKS)
                 .then().log().body().extract().response();
     }
 
@@ -45,7 +42,7 @@ public class VKDocksApiManagerImpl implements VKDocksApiManager {
                 .param("file", UtilsHelper.getUploadDocksInformation(getResponse()))
                 .param("title", "TEST")
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_SAVE_DOCK)
+                .when().get(VK_API_ENDPOINT_SAVE_DOCK)
                 .then().log().body().extract().response();
     }
 
@@ -57,7 +54,7 @@ public class VKDocksApiManagerImpl implements VKDocksApiManager {
                 .param("doc_id", idDocks)
                 .param("title", "test-doc123")
                 .log().uri()
-                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_EDIT_DOCK)
+                .when().get(VK_API_ENDPOINT_EDIT_DOCK)
                 .then().log().body().extract().response();
     }
 }

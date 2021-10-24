@@ -2,27 +2,18 @@ package api.models.vk_api;
 
 import api.models.vk_api.interfaces.*;
 import api.models.vk_api.interfaces.impl.*;
-import api.utils.BaseUri;
-import api.utils.impl.BaseUriImpl;
 import api.utils.UtilsHelper;
 import com.google.gson.Gson;
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.RandomStringUtils;
 import pojo.Root;
-import java.io.File;
 import java.util.*;
-
-import static constants.Constants.EndPoint.*;
 
 @Getter
 @Setter
 public class VKApiManager {
-    protected BaseUri baseUri = new BaseUriImpl();
-    protected UtilsHelper utilsHelper;
     protected Root root;
     protected Response response;
     private List<Object> idUniversals = new ArrayList<>();
@@ -180,51 +171,23 @@ public class VKApiManager {
     }
 
     public VKApiManager putTagToPhoto(String VKApi, String VKVersion) {
-//        response = RestAssured.given().params(getParams(VKApi, VKVersion))
-//                .param("owner_id", forPhotos.get(1))
-//                .param("photo_id", forPhotos.get(2))
-//                .param("user_id", forPhotos.get(1))
-//                .param("x", "10")
-//                .param("y", "10")
-//                .param("x2", "80")
-//                .param("y2", "80")
-//                .log().uri()
-//                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_PUT_TAG)
-//                .then().log().body().extract().response();
         vkPhotoApiManager.putTagToPhoto(getParams(VKApi, VKVersion), forPhotos.get(1), forPhotos.get(2));
         return this;
     }
 
     public VKApiManager createAlbum(String VKApi, String VKVersion) {
-//        response = RestAssured.given().params(getParams(VKApi, VKVersion))
-//                .param("title", "My test album")
-//                .log().uri()
-//                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_CREATE_ALBUM)
-//                .then().log().body().extract().response();
         response = vkPhotoApiManager.createAlbum(getParams(VKApi, VKVersion));
         forPhotos.add(UtilsHelper.getIds(response, "response.id")); // forPhotos.get(3) - id public album
         return this;
     }
 
     public VKApiManager movePhotoToAlbum(String VKApi, String VKVersion) {
-//        response = RestAssured.given().params(getParams(VKApi, VKVersion))
-//                .param("owner_id", forPhotos.get(1))
-//                .param("target_album_id", forPhotos.get(3))
-//                .param("photo_id", forPhotos.get(2))
-//                .log().uri()
-//                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_MOVE_PHOTO)
-//                .then().log().body().extract().response();
         vkPhotoApiManager.movePhotoToAlbum(getParams(VKApi, VKVersion),
                 forPhotos.get(1), forPhotos.get(3), forPhotos.get(2));
         return this;
     }
 
     public VKApiManager deletePhotoAlbum(String VKApi, String VKVersion) {
-//        response = RestAssured.given().params(getParams(VKApi, VKVersion))
-//                .param("album_id", forPhotos.get(0))
-//                .log().uri()
-//                .when().get(baseUri.baseUri() + VK_API_ENDPOINT_DELETE_PHOTO_ALBUM)
-//                .then().log().body().extract().response();
         vkPhotoApiManager.deletePhotoAlbum(getParams(VKApi, VKVersion), forPhotos.get(0));
         return this;
     }

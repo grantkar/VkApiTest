@@ -1,14 +1,23 @@
 package tests.vk_api;
 
-
+import api.utils.BaseUri;
+import api.utils.impl.BaseUriImpl;
 import base.BaseTest;
 import constants.Constants;
+import io.restassured.RestAssured;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class ApiTest extends BaseTest {
     private Constants constants = new Constants();
     private String VkApi = constants.getVK_API();
     private String VkVersion = constants.getVK_VERSION();
+    private BaseUri base = new BaseUriImpl();
+
+    @BeforeClass
+    public void setup() {
+        RestAssured.baseURI = base.baseUri();
+    }
 
     @Test(priority = 1,description = "search user info")
     public void getInfoProfileVK(){
