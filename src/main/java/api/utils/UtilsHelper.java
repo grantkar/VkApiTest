@@ -4,6 +4,7 @@ import io.restassured.response.Response;
 import lombok.experimental.UtilityClass;
 import pojo.Root;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -18,6 +19,24 @@ public class UtilsHelper {
             return emptyFieldValue + "Test";
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return "";
+    }
+
+    public String findEmptyFieldsName(Root root) {
+        List<String> emptyFields = new ArrayList<>();
+        Map<String, String> map = new HashMap<>();
+        map.put("first_name", root.getResponse().getFirstName());
+        map.put("last_name", root.getResponse().getLastName());
+        map.put("bdate", root.getResponse().getBDate());
+        map.put("status", root.getResponse().getStatus());
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (entry.getValue().isEmpty()) {
+                emptyFields.add(entry.getKey());
+            }
+        }
+        if (!emptyFields.isEmpty()) {
+            return emptyFields.get(0);
         }
         return "";
     }

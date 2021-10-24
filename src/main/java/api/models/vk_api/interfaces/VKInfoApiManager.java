@@ -1,4 +1,4 @@
-package api.models.vk_api;
+package api.models.vk_api.interfaces;
 
 import java.util.Map;
 
@@ -12,7 +12,7 @@ public interface VKInfoApiManager {
     /**
      * Метод заполняет недостающую информацию
      * */
-    void setProfileInfo(Map<String, String> params, String emptyParam);
+    void setProfileInfo(Map<String, String> params, String emptyField, String emptyValue);
 
     /**
      * Метод получает в ответ ссылку для загрузки главной фотографии профиля
