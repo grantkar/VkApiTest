@@ -9,52 +9,28 @@ public class Constants {
 
     //domain name
     public static class ServerName{
-        public static String VK_API_SERVER = "https://api.vk.com/";
+        public static String TRELLO_API_SERVER = "https://api.trello.com/";
     }
 
     //path
     public static class Path{
-        public static String VK_API_PATH = "method/";
+        public static String TRELLO_API_PATH = "1/";
     }
 
     //endpoint
     public static class EndPoint{
-        public static final String VK_API_ENDPOINT_GET_PROFILE_INFO = "account.getProfileInfo";
-        public static final String VK_API_ENDPOINT_SET_PROFILE_INFO = "account.saveProfileInfo";
-
-        public static final String VK_API_ENDPOINT_GET_SAVE_URL_PHOTO = "photos.getOwnerPhotoUploadServer";
-        public static final String VK_API_ENDPOINT_UPLOAD_PHOTO_TO_SERVER = "photos.saveOwnerPhoto";
-
-        public static final String VK_API_ENDPOINT_GET_SAVE_URL_DOCKS = "docs.getUploadServer";
-        public static final String VK_API_ENDPOINT_SAVE_DOCK = "docs.save";
-        public static final String VK_API_ENDPOINT_EDIT_DOCK = "docs.edit";
-
-        public static final String VK_API_ENDPOINT_GET_NEWS_RECOMMENDED = "newsfeed.getRecommended";
-
-        public static final String VK_API_ENDPOINT_ADD_LIKES = "likes.add";
-
-        public static final String VK_API_ENDPOINT_ACCOUNT_BAN = "account.ban";
-
-        public static final String VK_API_ENDPOINT_ADD_POST_FIVE = "fave.addPost";
-
-        public static final String VK_API_ENDPOINT_CREATE_GROUPS = "groups.create";
-
-        public static final String VK_API_ENDPOINT_ADD_TOPIC = "board.addTopic";
-        public static final String VK_API_ENDPOINT_CREATE_COMMENT = "board.createComment";
-        public static final String VK_API_ENDPOINT_EDIT_COMMENT = "board.editComment";
-        public static final String VK_API_ENDPOINT_DELETE_COMMENT = "board.deleteComment";
-
-        public static final String VK_API_ENDPOINT_CREATE_ALBUM = "photos.createAlbum";
-        public static final String VK_API_ENDPOINT_GET_SAVE_URL_PHOTO_TO_ALBUM = "photos.getUploadServer";
-        public static final String VK_API_ENDPOINT_SAVE_PHOTO_TO_ALBUM = "photos.save";
-        public static final String VK_API_ENDPOINT_MAKER_PHOTO_COVER_ALBUM = "photos.makeCover";
-        public static final String VK_API_ENDPOINT_CREATE_COMMENT_PHOTO = "photos.createComment";
-        public static final String VK_API_ENDPOINT_PUT_TAG= "photos.putTag";
-        public static final String VK_API_ENDPOINT_MOVE_PHOTO= "photos.move";
-        public static final String VK_API_ENDPOINT_DELETE_PHOTO_ALBUM= "photos.deleteAlbum";
+        public static final String TRELLO_ENDPOINT_CREATE_A_BOARD = "boards";
+        public static final String TRELLO_ENDPOINT_CREATE_A_LIST = "lists";
+        public static final String TRELLO_ENDPOINT_CREATE_A_CARD = "cards";
+        public static final String TRELLO_ENDPOINT_CREATE_ATTACHMENT = "/attachments"; // TRELLO_ENDPOINT_CREATE_A_CARD + /{id}
+        public static final String TRELLO_ENDPOINT_CREATE_A_CHECKLIST = "checklists";
+        public static final String TRELLO_ENDPOINT_CREATE_A_CHECKITEMS = "/checkItems"; // TRELLO_ENDPOINT_CREATE_A_CHECKLIST + /{id}
+        public static final String TRELLO_ENDPOINT_ARCHIVE_A_LIST = "lists/{id}/closed";
+        public static final String TRELLO_ENDPOINT_UPDATE_CHECKITEM = "cards/{id}/checkItem/{idCheckItem}";
+        public static final String TRELLO_ENDPOINT_ADD_ACTION = "cards/{id}/actions/comments";
     }
 
-    private final String VK_API = token.decrypt();
-    private final String VK_VERSION = "5.131";
+    private final String TRELLO_API_KEY = token.trelloApiKey();
+    private final String TRELLO_API_TOKEN = token.trelloApiToken();
 
 }

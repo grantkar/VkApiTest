@@ -43,8 +43,22 @@ public class DBRequestHandler {
         }
     }
 
-    public String getToken() {
-        String dbQuery = "Select hash From tokens Where name = 'VKAPI'";
+    public String getTrelloToken() {
+        String dbQuery = "Select hash From tokens Where name = 'TrelloApiToken'";
+        String hash = "";
+        try {
+            ResultSet resultSet = statement.executeQuery(dbQuery);
+            while (resultSet.next()){
+                hash = resultSet.getString("hash");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return hash;
+    }
+
+    public String getApiKey() {
+        String dbQuery = "Select hash From tokens Where name = 'TrelloApiKey'";
         String hash = "";
         try {
             ResultSet resultSet = statement.executeQuery(dbQuery);
