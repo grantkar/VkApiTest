@@ -1,11 +1,10 @@
 package jdbs;
 
 import api.utils.UtilsMethod;
-
 import java.sql.*;
 
 public class DBRequestHandler {
-    public String jdbcURL = "jdbc:postgresql://localhost:5432/tokenAPI";
+    public static final String JDBC_URL = "jdbc:postgresql://localhost:5432/tokenAPI";
 
     private static final String USER_NAME = UtilsMethod.getValue("USER_NAME");
     private static final String USER_PASSWORD = UtilsMethod.getValue("USER_PASSWORD");
@@ -17,9 +16,9 @@ public class DBRequestHandler {
      * Метод устаналивает соедение с БД.
      * @return - объект соединения с БД
      */
-    public Connection connect() {
+    public static Connection connect() {
         try {
-            connection = DriverManager.getConnection(jdbcURL, USER_NAME, USER_PASSWORD);
+            connection = DriverManager.getConnection(JDBC_URL, USER_NAME, USER_PASSWORD);
             statement = connection.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();

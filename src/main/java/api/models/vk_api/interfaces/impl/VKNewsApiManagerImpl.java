@@ -4,15 +4,14 @@ import api.models.vk_api.interfaces.VKNewsApiManager;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import lombok.Getter;
-
 import java.util.Map;
-
 import static constants.Constants.EndPoint.*;
 
 @Getter
 public class VKNewsApiManagerImpl implements VKNewsApiManager {
 
     private Response response;
+    private static final String OWNER = "owner_id";
 
     @Override
     public Response getNewsRecommended(Map<String, String> params) {
@@ -27,7 +26,7 @@ public class VKNewsApiManagerImpl implements VKNewsApiManager {
     public void likesPost(Map<String, String> params, Integer idFivePost, Integer idFivesOwners) {
         response = RestAssured.given().params(params)
                 .param("type", "post")
-                .param("owner_id", idFivesOwners)
+                .param(OWNER, idFivesOwners)
                 .param("item_id", idFivePost)
                 .log().uri()
                 .when().get(VK_API_ENDPOINT_ADD_LIKES)
@@ -37,7 +36,7 @@ public class VKNewsApiManagerImpl implements VKNewsApiManager {
     @Override
     public void banAccountOwnerSixPost(Map<String, String> params, Integer idOwner) {
         response = RestAssured.given().params(params)
-                .param("owner_id", idOwner)
+                .param(OWNER, idOwner)
                 .log().uri()
                 .when().get(VK_API_ENDPOINT_ACCOUNT_BAN)
                 .then().log().body().extract().response();
@@ -46,7 +45,7 @@ public class VKNewsApiManagerImpl implements VKNewsApiManager {
     @Override
     public void addPostsToFave(Map<String, String> params, Integer idOwner, Integer idPost) {
         response = RestAssured.given().params(params)
-                .param("owner_id", idOwner)
+                .param(OWNER, idOwner)
                 .param("id", idPost)
                 .log().uri()
                 .when().get(VK_API_ENDPOINT_ADD_POST_FIVE)

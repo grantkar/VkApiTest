@@ -36,7 +36,6 @@ public class VKInfoApiManagerImpl implements VKInfoApiManager {
         response = RestAssured.given().params(params).log().uri()
                 .when().get(VK_API_ENDPOINT_GET_SAVE_URL_PHOTO)
                 .then().log().body().extract().response();
-        System.out.println(UtilsHelper.getUrlUploadFile(response));
     }
 
     @Override

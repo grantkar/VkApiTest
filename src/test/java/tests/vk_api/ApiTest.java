@@ -9,10 +9,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class ApiTest extends BaseTest {
-    private Constants constants = new Constants();
-    private String VkApi = constants.getVK_API();
-    private String VkVersion = constants.getVK_VERSION();
-    private BaseUri base = new BaseUriImpl();
+    private static final String VkApi = Constants.VK_API;
+    private static final String VkVersion = Constants.VK_VERSION;
+    private static final BaseUri base = new BaseUriImpl();
 
     @BeforeClass
     public void setup() {

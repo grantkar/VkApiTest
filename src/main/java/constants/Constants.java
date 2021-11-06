@@ -1,23 +1,28 @@
 package constants;
 import jdbs.GetToken;
 import lombok.Getter;
+import lombok.experimental.UtilityClass;
 
 @Getter
+@UtilityClass
 public class Constants {
 
-   private static GetToken token = new GetToken();
+   private static final GetToken token = new GetToken();
 
     //domain name
+    @UtilityClass
     public static class ServerName{
-        public static String VK_API_SERVER = "https://api.vk.com/";
+        public static final String VK_API_SERVER = "https://api.vk.com/";
     }
 
     //path
+    @UtilityClass
     public static class Path{
-        public static String VK_API_PATH = "method/";
+        public static final String VK_API_PATH = "method/";
     }
 
     //endpoint
+    @UtilityClass
     public static class EndPoint{
         public static final String VK_API_ENDPOINT_GET_PROFILE_INFO = "account.getProfileInfo";
         public static final String VK_API_ENDPOINT_SET_PROFILE_INFO = "account.saveProfileInfo";
@@ -54,7 +59,7 @@ public class Constants {
         public static final String VK_API_ENDPOINT_DELETE_PHOTO_ALBUM= "photos.deleteAlbum";
     }
 
-    private final String VK_API = token.decrypt();
-    private final String VK_VERSION = "5.131";
+    public static final String VK_API = token.decrypt();
+    public static final String VK_VERSION = "5.131";
 
 }

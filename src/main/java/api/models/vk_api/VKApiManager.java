@@ -16,6 +16,7 @@ import java.util.*;
 public class VKApiManager {
     protected Root root;
     protected Response response;
+    private static final String PARSE = "response.id";
     private List<Object> idUniversals = new ArrayList<>();
     private List<Integer> idComments = new ArrayList<>();
     private List<Object> forPhotos = new ArrayList<>();
@@ -106,7 +107,7 @@ public class VKApiManager {
     }
 
     public VKApiManager createGroup(String VKApi, String VKVersion) {
-        idUniversals.add(UtilsHelper.getIds(vkTopicApiManager.createGroup(getParams(VKApi, VKVersion)), "response.id")); //id группы 2 элемент
+        idUniversals.add(UtilsHelper.getIds(vkTopicApiManager.createGroup(getParams(VKApi, VKVersion)), PARSE)); //id группы 2 элемент
         return this;
     }
 
@@ -134,7 +135,7 @@ public class VKApiManager {
 
     public VKApiManager createPrivetAlbum(String VKApi, String VKVersion) {
         response = vkPhotoApiManager.createPrivetAlbum(getParams(VKApi, VKVersion));
-        forPhotos.add(UtilsHelper.getIds(response, "response.id")); // forPhoto.get(0) - id privet album
+        forPhotos.add(UtilsHelper.getIds(response, PARSE)); // forPhoto.get(0) - id privet album
         return this;
     }
 
@@ -158,7 +159,7 @@ public class VKApiManager {
 
     public VKApiManager makerPhotoCoverAlbum(String VKApi, String VKVersion) {
         forPhotos.add(UtilsHelper.getIntegerForString(getResponse().jsonPath().getString("response.owner_id")));
-        forPhotos.add(UtilsHelper.getIntegerForString(getResponse().jsonPath().getString("response.id")));
+        forPhotos.add(UtilsHelper.getIntegerForString(getResponse().jsonPath().getString(PARSE)));
         vkPhotoApiManager.makerPhotoCoverAlbum(getParams(VKApi, VKVersion),
                 forPhotos.get(0), forPhotos.get(1), forPhotos.get(2));
         return this;
@@ -177,7 +178,7 @@ public class VKApiManager {
 
     public VKApiManager createAlbum(String VKApi, String VKVersion) {
         response = vkPhotoApiManager.createAlbum(getParams(VKApi, VKVersion));
-        forPhotos.add(UtilsHelper.getIds(response, "response.id")); // forPhotos.get(3) - id public album
+        forPhotos.add(UtilsHelper.getIds(response, PARSE)); // forPhotos.get(3) - id public album
         return this;
     }
 
@@ -192,10 +193,10 @@ public class VKApiManager {
         return this;
     }
 
-    public Map <String, String> getParams (String VKApi, String VKVersion){
+    public Map <String, String> getParams (String VKApi, String VkVersion){
         Map<String, String> params = new HashMap<>();
         params.put("access_token", VKApi);
-        params.put("v", VKVersion);
+        params.put("v", VkVersion);
         return params;
     }
 }

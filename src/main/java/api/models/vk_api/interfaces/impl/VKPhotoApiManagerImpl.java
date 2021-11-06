@@ -13,6 +13,9 @@ import static constants.Constants.EndPoint.*;
 public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
 
     private Response response;
+    private static final String ALBUM = "album_id";
+    private static final String OWNER = "owner_id";
+    private static final String PHOTO = "photo_id";
 
     @Override
     public Response createPrivetAlbum(Map<String, String> params) {
@@ -28,7 +31,7 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
     @Override
     public Response getUrlForUploadPhotoToAlbum(Map<String, String> params, Object idAlbum) {
         response = RestAssured.given().params(params)
-                .param("album_id", idAlbum)
+                .param(ALBUM, idAlbum)
                 .log().uri()
                 .when().get(VK_API_ENDPOINT_GET_SAVE_URL_PHOTO_TO_ALBUM)
                 .then().log().body().extract().response();
@@ -50,7 +53,7 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
     @Override
     public Response savePhotoToAlbum(Map<String, String> params, Map<String, Object> paramsForSave, Object idAlbum) {
         response = RestAssured.given().params(params)
-                .param("album_id", idAlbum)
+                .param(ALBUM, idAlbum)
                 .param("server", paramsForSave.get("server"))
                 .param("photos_list", paramsForSave.get("photos_list"))
                 .param("aid", paramsForSave.get("aid"))
@@ -64,9 +67,9 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
     @Override
     public void makerPhotoCoverAlbum(Map<String, String> params, Object idAlbum, Object idOwner, Object idPhoto) {
         response = RestAssured.given().params(params)
-                .param("album_id", idAlbum)
-                .param("owner_id", idOwner)
-                .param("photo_id", idPhoto)
+                .param(ALBUM, idAlbum)
+                .param(OWNER, idOwner)
+                .param(PHOTO, idPhoto)
                 .log().uri()
                 .when().get(VK_API_ENDPOINT_MAKER_PHOTO_COVER_ALBUM)
                 .then().log().body().extract().response();
@@ -75,8 +78,8 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
     @Override
     public void createCommentPhoto(Map<String, String> params, Object idOwner, Object idPhoto) {
         response = RestAssured.given().params(params)
-                .param("owner_id", idOwner)
-                .param("photo_id", idPhoto)
+                .param(OWNER, idOwner)
+                .param(PHOTO, idPhoto)
                 .param("message", "Test comment by My")
                 .log().uri()
                 .when().get(VK_API_ENDPOINT_CREATE_COMMENT_PHOTO)
@@ -86,8 +89,8 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
     @Override
     public void putTagToPhoto(Map<String, String> params, Object idOwner, Object idPhoto) {
         response = RestAssured.given().params(params)
-                .param("owner_id", idOwner)
-                .param("photo_id", idPhoto)
+                .param(OWNER, idOwner)
+                .param(PHOTO, idPhoto)
                 .param("user_id", idOwner)
                 .param("x", "10")
                 .param("y", "10")
@@ -111,9 +114,9 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
     @Override
     public void movePhotoToAlbum(Map<String, String> params, Object idOwner, Object TargetAlbumId, Object idPhoto) {
         response = RestAssured.given().params(params)
-                .param("owner_id", idOwner)
+                .param(OWNER, idOwner)
                 .param("target_album_id", TargetAlbumId)
-                .param("photo_id", idPhoto)
+                .param(PHOTO, idPhoto)
                 .log().uri()
                 .when().get(VK_API_ENDPOINT_MOVE_PHOTO)
                 .then().log().body().extract().response();
@@ -122,7 +125,7 @@ public class VKPhotoApiManagerImpl implements VKPhotoApiManager {
     @Override
     public void deletePhotoAlbum(Map<String, String> params, Object idAlbum) {
         response = RestAssured.given().params(params)
-                .param("album_id", idAlbum)
+                .param(ALBUM, idAlbum)
                 .log().uri()
                 .when().get(VK_API_ENDPOINT_DELETE_PHOTO_ALBUM)
                 .then().log().body().extract().response();

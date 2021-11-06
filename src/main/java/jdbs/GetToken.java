@@ -4,7 +4,7 @@ import api.utils.UtilsMethod;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
 public class GetToken {
-   public DBRequestHandler handler = new DBRequestHandler();
+   public static final DBRequestHandler handler = new DBRequestHandler();
 
     public String decrypt() {
         handler.connect();

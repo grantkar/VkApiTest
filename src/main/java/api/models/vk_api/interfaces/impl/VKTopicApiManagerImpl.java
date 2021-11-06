@@ -11,6 +11,8 @@ import static constants.Constants.EndPoint.*;
 public class VKTopicApiManagerImpl implements VKTopicApiManager {
 
     private Response response;
+    private static final String GROUP = "group_id";
+    private static final String TOPIC = "topic_id";
 
     @Override
     public Response createGroup(Map<String, String> params) {
@@ -25,7 +27,7 @@ public class VKTopicApiManagerImpl implements VKTopicApiManager {
     @Override
     public Response boardAddTopic(Map<String, String> params, Object idGroup) {
         response = RestAssured.given().params(params)
-                .param("group_id", idGroup)
+                .param(GROUP, idGroup)
                 .param("title", "Discussion")
                 .param("text", "Test discussion")
                 .log().uri()
@@ -37,8 +39,8 @@ public class VKTopicApiManagerImpl implements VKTopicApiManager {
     @Override
     public Response createComment(Map<String, String> params, Object idGroup, Object idTopic, String massage) {
         response = RestAssured.given().params(params)
-                .param("group_id", idGroup)
-                .param("topic_id", idTopic)
+                .param(GROUP, idGroup)
+                .param(TOPIC, idTopic)
                 .param("message", massage)
                 .log().uri()
                 .when().get(VK_API_ENDPOINT_CREATE_COMMENT)
@@ -49,8 +51,8 @@ public class VKTopicApiManagerImpl implements VKTopicApiManager {
     @Override
     public void editComment(Map<String, String> params, Object idGroup, Object idTopic, Object idComment) {
         response = RestAssured.given().params(params)
-                .param("group_id", idGroup)
-                .param("topic_id", idTopic)
+                .param(GROUP, idGroup)
+                .param(TOPIC, idTopic)
                 .param("comment_id", idComment)
                 .param("message", "Test Comment")
                 .log().uri()
@@ -61,8 +63,8 @@ public class VKTopicApiManagerImpl implements VKTopicApiManager {
     @Override
     public void deleteComment(Map<String, String> params, Object idGroup, Object idTopic, Object idComment) {
         response = RestAssured.given().params(params)
-                .param("group_id", idGroup)
-                .param("topic_id", idTopic)
+                .param(GROUP, idGroup)
+                .param(TOPIC, idTopic)
                 .param("comment_id", idComment)
                 .log().uri()
                 .when().get(VK_API_ENDPOINT_DELETE_COMMENT)
