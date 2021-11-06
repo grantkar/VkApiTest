@@ -22,5 +22,5 @@ public interface VKDocksApiManager {
     /**
      * Метод меняет название загруженного документа
      * */
-    void editDocksTitle (Map<String, String> params, Object owner_id);
+    void editDocksTitle (Map<String, String> params, Object ownerId);
 }

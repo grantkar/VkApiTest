@@ -6,10 +6,8 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.Getter;
-
 import java.io.File;
 import java.util.Map;
-
 import static constants.Constants.EndPoint.*;
 
 @Getter
@@ -47,10 +45,10 @@ public class VKDocksApiManagerImpl implements VKDocksApiManager {
     }
 
     @Override
-    public void editDocksTitle(Map<String, String> params, Object owner_id) {
+    public void editDocksTitle(Map<String, String> params, Object ownerId) {
         int idDocks = response.jsonPath().getInt("response.doc.id");
         response = RestAssured.given().params(params)
-                .param("owner_id", owner_id)
+                .param("owner_id", ownerId)
                 .param("doc_id", idDocks)
                 .param("title", "test-doc123")
                 .log().uri()

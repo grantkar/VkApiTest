@@ -26,7 +26,7 @@ public class Response{
     public Country country;
     public String phone;
     public int relation;
-    public RelationPartner relation_partner;
-    public List<RelationRequest> relation_requests;
+    public RelationPartner relationPartner;
+    public List<RelationRequest> relationRequests;
     public int sex;
 }
