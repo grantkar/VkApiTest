@@ -2,7 +2,6 @@ package api.utils;
 
 import lombok.experimental.UtilityClass;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
@@ -14,8 +13,6 @@ public class UtilsMethod {
         Properties properties = new Properties();
         try (FileInputStream fileInputStream = new FileInputStream("src/test/resources/" + "userData.properties");) {
             properties.load(fileInputStream);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -43,6 +43,9 @@ public class DBRequestHandler {
         }
     }
 
+    /**
+     * Метод получает Trello Token из БД в хешированном виде
+     */
     public String getTrelloToken() {
         String dbQuery = "Select hash From tokens Where name = 'TrelloApiToken'";
         String hash = "";
@@ -57,6 +60,9 @@ public class DBRequestHandler {
         return hash;
     }
 
+    /**
+     * Метод получает API KEY из БД в хешированном виде
+     */
     public String getApiKey() {
         String dbQuery = "Select hash From tokens Where name = 'TrelloApiKey'";
         String hash = "";

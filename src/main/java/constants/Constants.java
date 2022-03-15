@@ -28,6 +28,9 @@ public class Constants {
         public static final String TRELLO_ENDPOINT_ARCHIVE_A_LIST = "lists/{id}/closed";
         public static final String TRELLO_ENDPOINT_UPDATE_CHECKITEM = "cards/{id}/checkItem/{idCheckItem}";
         public static final String TRELLO_ENDPOINT_ADD_ACTION = "cards/{id}/actions/comments";
+
+        public static final String TRELLO_ENDPOINT_AUTHORIZATION = "members/me";
+
     }
 
     private final String TRELLO_API_KEY = token.trelloApiKey();

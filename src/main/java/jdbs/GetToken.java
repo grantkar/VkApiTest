@@ -6,6 +6,9 @@ import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 public class GetToken {
    public DBRequestHandler handler = new DBRequestHandler();
 
+    /**
+     * Метод декодирует Api Key
+     */
     public String trelloApiKey() {
         handler.connect();
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
@@ -13,6 +16,9 @@ public class GetToken {
         return encryptor.decrypt(handler.getApiKey());
     }
 
+    /**
+     * Метод декодирует Trello Token
+     */
     public String trelloApiToken() {
         handler.connect();
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
