@@ -12,11 +12,11 @@ import java.util.Map;
 
 import static constants.Constants.EndPoint.*;
 
-// проверить статус коды
 @Getter
 public class TrelloBoardManagerImpl implements TrelloBoardManager {
 
     private Response response;
+    private String idBoard;
 
     @Override
     public Response createBoard(Map<String, String> params) {
@@ -24,8 +24,17 @@ public class TrelloBoardManagerImpl implements TrelloBoardManager {
         object.put("name", "KanbanTool");
         response = RestAssured.given().contentType("application/json")
                 .body(object.toString()).when().post(TRELLO_ENDPOINT_CREATE_A_BOARD)
-                .then().log().body().extract().response();
+                .then().statusCode(200).log().body().extract().response();
+        idBoard = response.jsonPath().getString("id");
         return response;
+    }
+
+    @Override
+    public String checkCreatedBoard(Map<String, String> params) {
+        response = RestAssured.given().params(params)
+                .when().get(TRELLO_ENDPOINT_CREATE_A_BOARD + "/" + idBoard)
+                .then().statusCode(200).log().body().extract().response();
+        return response.jsonPath().getString("name");
     }
 
     @Override
@@ -35,7 +44,7 @@ public class TrelloBoardManagerImpl implements TrelloBoardManager {
         object.put("idBoard", idBoard);
         response = RestAssured.given().contentType("application/json")
                 .body(object.toString()).when().post(TRELLO_ENDPOINT_CREATE_A_LIST)
-                .then().log().body().extract().response();
+                .then().statusCode(200).log().body().extract().response();
         return response;
     }
 
@@ -46,7 +55,7 @@ public class TrelloBoardManagerImpl implements TrelloBoardManager {
         object.put("idList", idList);
         response = RestAssured.given().contentType("application/json")
                 .body(object.toString()).when().post(TRELLO_ENDPOINT_CREATE_A_CARD)
-                .then().log().body().extract().response();
+                .then().statusCode(200).log().body().extract().response();
         return response;
     }
 
@@ -60,7 +69,7 @@ public class TrelloBoardManagerImpl implements TrelloBoardManager {
                 .contentType("multipart/form-data")
                 .multiPart(new File(filePath))
                 .post(TRELLO_ENDPOINT_CREATE_A_CARD + "/" + idCard + TRELLO_ENDPOINT_CREATE_ATTACHMENT)
-                .then().log().body().extract().response();
+                .then().statusCode(200).log().body().extract().response();
         return response;
     }
 
@@ -70,7 +79,7 @@ public class TrelloBoardManagerImpl implements TrelloBoardManager {
         object.put("due", UtilsHelper.getDateTomorrow());
         response = RestAssured.given().contentType("application/json")
                 .body(object.toString()).when().put(TRELLO_ENDPOINT_CREATE_A_CARD + "/" + idCard)
-                .then().log().body().extract().response();
+                .then().statusCode(200).log().body().extract().response();
     }
 
     @Override
@@ -79,6 +88,6 @@ public class TrelloBoardManagerImpl implements TrelloBoardManager {
         object.put("desc", "Тут будет отмечаться прогресс обучения");
         response = RestAssured.given().contentType("application/json")
                 .body(object.toString()).when().put(TRELLO_ENDPOINT_CREATE_A_CARD + "/" + idCard)
-                .then().log().body().extract().response();
+                .then().statusCode(200).log().body().extract().response();
     }
 }

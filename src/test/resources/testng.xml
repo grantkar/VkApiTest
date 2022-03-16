@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="API Test" verbose="1">
+    <test name="TrelloApiTest">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="tests.trello_api.TrelloTest" />
+            <class name="tests.trello_api.TrelloAssertionTest" />
+        </classes>
+    </test>
+</suite>

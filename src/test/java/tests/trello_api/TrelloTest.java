@@ -9,11 +9,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class TrelloTest extends BaseTest {
-    private Constants constants = new Constants();
-    private String apiKey = constants.getTRELLO_API_KEY();
-    private String apiToken = constants.getTRELLO_API_TOKEN();
 
-    private BaseUri base = new BaseUriTrelloImpl();
+    private final Constants constants = new Constants();
+    private final String apiKey = constants.getTRELLO_API_KEY();
+    private final String apiToken = constants.getTRELLO_API_TOKEN();
+
+    private final BaseUri base = new BaseUriTrelloImpl();
 
 
     @BeforeClass
@@ -24,7 +25,6 @@ public class TrelloTest extends BaseTest {
     @Test(priority = 1,description = "create a Board")
     public void createABoard(){
         apiManager.getTrelloApiManager().createBoard(apiKey, apiToken);
-        // проверить что создалась доска
     }
 
     @Test(priority = 2,description = "create a List")
@@ -99,6 +99,11 @@ public class TrelloTest extends BaseTest {
 
     @Test(priority = 16,description = "Check what the card is on List")
     public void checkingCardOnList() {
+    }
+
+    @Test(priority = 17,description = "check title a created Board")
+    public void checkCreateABoard(){
+        apiManager.getTrelloApiManager().checkCreateBoard(apiKey, apiToken);
     }
 }
 

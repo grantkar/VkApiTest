@@ -12,6 +12,11 @@ public interface TrelloBoardManager {
     Response createBoard(Map<String, String> params);
 
     /**
+     * return - String с названием ранее созданной доски
+     * */
+    String checkCreatedBoard(Map<String, String> params);
+
+    /**
      * return - response с информацией о созданной колонке на доске idBoard
      * */
     Response createList(Map<String, String> params, String idBoard, String name);

@@ -18,7 +18,7 @@ public class TrelloCheckListManagerImpl implements TrelloCheckListManager {
         object.put("idCard", idCard);
         response = RestAssured.given().contentType("application/json")
                 .body(object.toString()).when().post(TRELLO_ENDPOINT_CREATE_A_CHECKLIST)
-                .then().log().body().extract().response();
+                .then().statusCode(200).log().body().extract().response();
         return response;
     }
 
@@ -28,7 +28,7 @@ public class TrelloCheckListManagerImpl implements TrelloCheckListManager {
         object.put("name", name);
         response = RestAssured.given().contentType("application/json")
                 .body(object.toString()).when().post(TRELLO_ENDPOINT_CREATE_A_CHECKLIST + "/" + idCheckList + TRELLO_ENDPOINT_CREATE_A_CHECKITEMS)
-                .then().log().body().extract().response();
+                .then().statusCode(200).log().body().extract().response();
         return response;
     }
 
@@ -40,7 +40,7 @@ public class TrelloCheckListManagerImpl implements TrelloCheckListManager {
                 .params(params)
                 .queryParam("state", "complete")
                 .when().put(TRELLO_ENDPOINT_UPDATE_CHECKITEM)
-                .then().log().body().extract().response();
+                .then().statusCode(200).log().body().extract().response();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class TrelloCheckListManagerImpl implements TrelloCheckListManager {
         object.put("idList", idList);
         response = RestAssured.given().contentType("application/json")
                 .body(object.toString()).when().put(TRELLO_ENDPOINT_CREATE_A_CARD + "/" + idCard)
-                .then().log().body().extract().response();
+                .then().statusCode(200).log().body().extract().response();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class TrelloCheckListManagerImpl implements TrelloCheckListManager {
                 .pathParam("id", idList)
                 .log().uri()
                 .body(object.toString()).when().put(TRELLO_ENDPOINT_ARCHIVE_A_LIST)
-                .then().log().body().extract().response();
+                .then().statusCode(200).log().body().extract().response();
     }
 
     @Override
@@ -72,7 +72,7 @@ public class TrelloCheckListManagerImpl implements TrelloCheckListManager {
                 .pathParam("id", idCard)
                 .log().uri()
                 .body(object.toString()).when().post(TRELLO_ENDPOINT_ADD_ACTION)
-                .then().log().body().extract().response();
+                .then().statusCode(200).log().body().extract().response();
     }
 
 }

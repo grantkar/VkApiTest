@@ -7,6 +7,8 @@ import api.models.trello_api.interfaces.impl.TrelloCheckListManagerImpl;
 import io.restassured.response.Response;
 import lombok.Getter;
 import lombok.Setter;
+import org.testng.Assert;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +33,13 @@ public class TrelloApiManager {
     public TrelloApiManager createBoard(String apiKey, String apiToken) {
         response = trelloBoardManager.createBoard(getParams(apiKey, apiToken));
         parseInformation.put(ID_BOARD, response.jsonPath().getString(ID));
+        return this;
+    }
+
+    public TrelloApiManager checkCreateBoard(String apiKey, String apiToken) {
+        String Expected = "KanbanTool";
+        String Actual = trelloBoardManager.checkCreatedBoard(getParams(apiKey, apiToken));
+        Assert.assertEquals(Expected,Actual, "Название доски " + Actual + " ,а не " + Expected);
         return this;
     }
 

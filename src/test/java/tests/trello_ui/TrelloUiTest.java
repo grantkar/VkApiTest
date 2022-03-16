@@ -4,7 +4,9 @@ import base.BaseTest;
 import constants.Constants;
 import org.openqa.selenium.By;
 import org.apache.log4j.Logger;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.Assertion;
 
 import java.time.Duration;
 
@@ -13,7 +15,8 @@ import static com.codeborne.selenide.Condition.*;
 
 public class TrelloUiTest extends BaseTest {
 
-    private Constants constants = new Constants();
+    private static final String titleBoard = "Ученики";
+    private static final String nameBoard = "Только для образования";
     private static final Logger log = Logger.getLogger(TrelloUiTest.class);
 
     @Test(priority = 1,description = "auth")
@@ -23,9 +26,8 @@ public class TrelloUiTest extends BaseTest {
         $(By.xpath("//input[@value = 'Войти с помощью Atlassian']")).click();
         $(By.id("password")).setValue("Tigrasmo2");
         $(By.id("login-submit")).click();
-
     }
-// добавил доп ожидание для доски 'KanbanTool', т.к. ресурс стал работать медленно
+
     @Test(priority = 2,description = "checked a Card on the list")
     public void checkedCard() {
         $(By.xpath("//div[@title = 'KanbanTool']")).shouldBe(visible, Duration.ofSeconds(10)).click();
@@ -64,13 +66,12 @@ public class TrelloUiTest extends BaseTest {
         $(By.xpath("//a[contains(@title, 'Закрыть меню доски.')]")).click();
     }
 
-    // добавить проверки через assert и should be
     @Test(priority = 7,description = "Make the board a team and educational one")
     public void setBoardEducational() {
         $(By.xpath("//a[contains(@class, 'board-header-btn-without-icon')]")).click();
         $(By.xpath("//a[contains(@class, 'js-change-org')]")).click();
         $(By.xpath("//a[contains(@class, 'right-of-button-link')]")).click();
-        $(By.id("org-display-name")).setValue("Ученики");
+        $(By.id("org-display-name")).setValue(titleBoard);
         $(By.xpath("//div[contains(@class, 'css-191o3mb')]")).click();
         $(By.xpath("//li[contains(text(), 'Образование')]")).click();
         $(By.xpath("//input[@value='Создать']")).click();
@@ -78,8 +79,8 @@ public class TrelloUiTest extends BaseTest {
 
     @Test(priority = 8,description = "Change workspace name")
     public void updateWorkspaceName() {
-        $(By.xpath("//button[contains(@class , '_3nslPxx5w1nLQy _3TTqkG5muwOzqZ')]")).click();
-        $(By.id("displayName")).setValue("Только для образования");
+        $(By.xpath("//button[contains(@class , '_3nslPxx5w1nLQy _3TTqkG5muwOzqZ')]")).shouldBe(visible, Duration.ofSeconds(10)).click();
+        $(By.id("displayName")).setValue(nameBoard);
         $(By.xpath("//button[contains(text(), 'Сохранить')]")).click();
     }
 }
