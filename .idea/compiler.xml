@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="TrelloApiTest" />
         <module name="VkApiTest" />
+        <module name="ApiTestingFramework" />
       </profile>
     </annotationProcessing>
   </component>

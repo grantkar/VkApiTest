@@ -16,11 +16,11 @@ public class TrelloApiManager {
 
     protected Response response;
 
-    private final String ID = "id";
-    private final String ID_BOARD = "idBoard";
-    private final String ID_CARD = "idCard";
-    private final String ID_LIST = "idList";
-    private final String ID_CHECKLIST = "idCheckList";
+    private static final String ID = "id";
+    private static final String ID_BOARD = "idBoard";
+    private static final String ID_CARD = "idCard";
+    private static final String ID_LIST = "idList";
+    private static final String ID_CHECKLIST = "idCheckList";
 
     private Map<String, String> parseInformation = new HashMap<>();
 

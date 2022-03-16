@@ -24,6 +24,7 @@ public class TrelloTest extends BaseTest {
     @Test(priority = 1,description = "create a Board")
     public void createABoard(){
         apiManager.getTrelloApiManager().createBoard(apiKey, apiToken);
+        // проверить что создалась доска
     }
 
     @Test(priority = 2,description = "create a List")

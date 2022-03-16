@@ -64,6 +64,7 @@ public class TrelloUiTest extends BaseTest {
         $(By.xpath("//a[contains(@title, 'Закрыть меню доски.')]")).click();
     }
 
+    // добавить проверки через assert и should be
     @Test(priority = 7,description = "Make the board a team and educational one")
     public void setBoardEducational() {
         $(By.xpath("//a[contains(@class, 'board-header-btn-without-icon')]")).click();

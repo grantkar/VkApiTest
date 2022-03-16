@@ -12,6 +12,7 @@ import java.util.Map;
 
 import static constants.Constants.EndPoint.*;
 
+// проверить статус коды
 @Getter
 public class TrelloBoardManagerImpl implements TrelloBoardManager {
 
