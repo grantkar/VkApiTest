@@ -17,7 +17,7 @@ public class TrelloAssertionTest extends BaseTest {
 
     private final BaseUri base = new BaseUriTrelloImpl();
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setup() {
         RestAssured.baseURI = base.baseUri();
     }

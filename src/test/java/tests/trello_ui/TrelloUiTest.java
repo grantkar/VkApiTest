@@ -73,6 +73,8 @@ public class TrelloUiTest extends BaseTest {
         $(By.xpath("//a[contains(@class, 'js-change-org')]")).click();
         $(By.xpath("//a[contains(@class, 'right-of-button-link')]")).click();
         $(By.id("org-display-name")).setValue(titleBoard);
+//        String actual = $(By.id("org-display-name")).getText();
+//        Assert.assertEquals(titleBoard, actual, "В поле введено отличное от "+ titleBoard + "значение: " + actual);
         $(By.xpath("//div[contains(@class, 'css-191o3mb')]")).click();
         $(By.xpath("//li[contains(text(), 'Образование')]")).click();
         $(By.xpath("//input[@value='Создать']")).click();

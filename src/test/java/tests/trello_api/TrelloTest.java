@@ -7,18 +7,19 @@ import constants.Constants;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 @Test(priority = 1, groups = {"apiTest"})
 public class TrelloTest extends BaseTest {
 
     private final Constants constants = new Constants();
     private final String apiKey = constants.getTRELLO_API_KEY();
     private final String apiToken = constants.getTRELLO_API_TOKEN();
-    private static final String GROUP_TITLE = "apiTest";
+  //  private static final String GROUP_TITLE = "apiTest";
 
     private final BaseUri base = new BaseUriTrelloImpl();
 
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setup() {
         RestAssured.baseURI = base.baseUri();
     }
