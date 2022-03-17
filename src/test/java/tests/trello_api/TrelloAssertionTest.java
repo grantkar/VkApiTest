@@ -8,6 +8,7 @@ import io.restassured.RestAssured;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+//@Test(priority = 2, groups = {"apiTest"})
 public class TrelloAssertionTest extends BaseTest {
 
     private final Constants constants = new Constants();
@@ -21,7 +22,7 @@ public class TrelloAssertionTest extends BaseTest {
         RestAssured.baseURI = base.baseUri();
     }
 
-    @Test(priority = 1,description = "check title a created Board")
+    @Test(description = "check title a created Board")
     public void checkCreateABoard(){
         apiManager.getTrelloApiManager().checkCreateBoard(apiKey, apiToken);
     }

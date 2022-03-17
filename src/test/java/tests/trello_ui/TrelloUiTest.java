@@ -13,6 +13,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.*;
 
+@Test(priority = 2, groups = {"apiTest"})
 public class TrelloUiTest extends BaseTest {
 
     private static final String titleBoard = "Ученики";
