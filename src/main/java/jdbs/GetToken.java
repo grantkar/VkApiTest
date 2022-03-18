@@ -13,6 +13,7 @@ public class GetToken {
         handler.connect();
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         encryptor.setPassword(UtilsMethod.getValue("KEY"));
+        handler.disconnect();
         return encryptor.decrypt(handler.getApiKey());
     }
 
@@ -23,6 +24,7 @@ public class GetToken {
         handler.connect();
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
         encryptor.setPassword(UtilsMethod.getValue("KEY"));
+        handler.disconnect();
         return encryptor.decrypt(handler.getTrelloToken());
     }
 }
